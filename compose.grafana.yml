@@ -1,0 +1,31 @@
+x-default-policy: &default_policy
+  restart: unless-stopped
+  logging:
+    driver: loki
+    options:
+      # FIXME: Change Loki URL
+      loki-url: "https://loki.cloudnativedays.jp/loki/api/v1/push"
+
+services:
+  grafana:
+    <<: *default_policy
+    container_name: grafana
+    image: grafana/grafana:11.1.1
+    volumes:
+      - grafana-data:/var/lib/grafana
+  https-portal:
+    <<: *default_policy
+    container_name: https-portal
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+    depends_on:
+      - grafana
+
+volumes:
+  grafana-data:
+    external: true
+  https-portal-data:
