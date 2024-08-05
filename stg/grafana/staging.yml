@@ -12,4 +12,4 @@ services:
     environment:
       DOMAINS: stg.grafana.cloudnativedays.jp -> http://grafana:3000
       # FIXME: use production
-      STAGE: staging
+      STAGE: production
