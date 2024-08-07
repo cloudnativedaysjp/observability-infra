@@ -1,0 +1,14 @@
+services:
+  grafana:
+    env_file:
+      - ./prod/grafana/.env
+    volumes:
+      - ./prod/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./prod/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./prod/grafana/config/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
+      - ./prod/grafana/config/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./prod/grafana/secrets/bigquery.pem:/etc/secrets/bigquery.pem
+  https-portal:
+    environment:
+      DOMAINS: grafana.cloudnativedays.jp -> http://grafana:3000
+      STAGE: production
