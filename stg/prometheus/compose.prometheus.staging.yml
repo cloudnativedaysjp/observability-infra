@@ -1,0 +1,12 @@
+---
+services:
+  prometheus:
+    healthcheck:
+      interval: "30s"
+      timeout: "1m30s"
+      retries: 10
+      start_period: "10s"
+      test: ["CMD", "wget", "http://localhost:9090"]
+    volumes:
+      - ./stg/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ./stg/prometheus/config/web.yaml:/etc/prometheus/web.yaml
