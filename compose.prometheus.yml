@@ -9,7 +9,7 @@ x-restart-policy: &restart_policy
 services:
   prometheus:
     <<: *restart_policy
-    image: prom/prometheus:v2.37.9
+    image: prom/prometheus:v2.54.0
     command: "--config.file=/etc/prometheus/prometheus.yaml --web.config.file=/etc/prometheus/web.yaml --storage.tsdb.retention.size=80GB"
     volumes:
       - prometheus-data:/etc/prometheus/data/
