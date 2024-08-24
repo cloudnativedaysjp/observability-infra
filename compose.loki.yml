@@ -25,3 +25,4 @@ services:
 volumes:
   loki-data:
     external: true
+  https-portal-data:
