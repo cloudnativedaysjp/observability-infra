@@ -23,6 +23,5 @@ services:
       - loki
 
 volumes:
-  https-portal-data:
   loki-data:
     external: true
