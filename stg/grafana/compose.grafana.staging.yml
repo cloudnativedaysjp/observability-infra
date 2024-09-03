@@ -1,3 +1,8 @@
+x-default-policy: &default_policy
+  logging:
+    options:
+      loki-url: "https://stg.loki.cloudnativedays.jp/loki/api/v1/push"
+
 services:
   grafana:
     env_file:
