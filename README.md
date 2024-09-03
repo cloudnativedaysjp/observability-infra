@@ -23,5 +23,5 @@ docker volume create grafana-data
 Grafana を起動します。
 
 ```bash
-docker compose -f compose.grafana.yml -f stg/grafana/staging.yml up -d
+docker compose -f compose.grafana.yml -f stg/grafana/compose.grafana.staging.yml up -d
 ```
