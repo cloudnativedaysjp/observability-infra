@@ -1,6 +1,9 @@
 ---
 services:
   prometheus:
+    logging:
+      options:
+        loki-url: "https://stg.loki.cloudnativedays.jp/loki/api/v1/push"
     healthcheck:
       interval: "30s"
       timeout: "1m30s"
@@ -10,3 +13,7 @@ services:
     volumes:
       - ./stg/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
       - ./stg/prometheus/config/web.yaml:/etc/prometheus/web.yaml
+  node-exporter:
+    logging:
+      options:
+        loki-url: "https://stg.loki.cloudnativedays.jp/loki/api/v1/push"
