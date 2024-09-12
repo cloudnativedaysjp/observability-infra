@@ -11,8 +11,8 @@ services:
       start_period: "10s"
       test: ["CMD", "wget", "http://localhost:9090"]
     volumes:
-      - ./stg/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
-      - ./stg/prometheus/config/web.yaml:/etc/prometheus/web.yaml
+      - ./prod/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ./prod/prometheus/config/web.yaml:/etc/prometheus/web.yaml
   node-exporter:
     logging:
       options:
