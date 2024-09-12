@@ -1,0 +1,33 @@
+---
+services:
+  prometheus:
+    restart: unless-stopped
+    logging:
+      driver: loki
+    image: prom/prometheus:v2.54.0
+    command: "--config.file=/etc/prometheus/prometheus.yaml --web.config.file=/etc/prometheus/web.yaml --storage.tsdb.retention.size=80GB"
+    volumes:
+      - prometheus-data:/etc/prometheus/data/
+    ports:
+      - 9090:9090
+  node-exporter:
+    restart: unless-stopped
+    logging:
+      driver: loki
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    expose:
+      - 9100
+
+volumes:
+  prometheus-data:
+    external: true
