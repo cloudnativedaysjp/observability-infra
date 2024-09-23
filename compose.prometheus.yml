@@ -1,9 +1,14 @@
----
+x-default-policy: &default_policy
+  restart: unless-stopped
+  logging:
+    driver: loki
+    options:
+      # FIXME: Change Loki URL
+      loki-url: "https://loki.cloudnativedays.jp/loki/api/v1/push"
+
 services:
   prometheus:
-    restart: unless-stopped
-    logging:
-      driver: loki
+    <<: *default_policy
     image: prom/prometheus:v2.54.0
     command: "--config.file=/etc/prometheus/prometheus.yaml --web.config.file=/etc/prometheus/web.yaml --storage.tsdb.retention.size=80GB"
     volumes:
@@ -11,9 +16,7 @@ services:
     ports:
       - 9090:9090
   node-exporter:
-    restart: unless-stopped
-    logging:
-      driver: loki
+    <<: *default_policy
     image: prom/node-exporter:latest
     container_name: node-exporter
     volumes:
@@ -27,6 +30,17 @@ services:
       - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
     expose:
       - 9100
+  https-portal:
+    <<: *default_policy
+    image: steveltn/https-portal:1
+    container_name: https-portal
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+    depends_on:
+      - prometheus
 
 volumes:
   prometheus-data:
