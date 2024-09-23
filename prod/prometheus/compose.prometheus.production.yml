@@ -1,0 +1,23 @@
+---
+services:
+  prometheus:
+    logging:
+      options:
+        loki-url: "https://loki.cloudnativedays.jp/loki/api/v1/push"
+    healthcheck:
+      interval: "30s"
+      timeout: "1m30s"
+      retries: 10
+      start_period: "10s"
+      test: ["CMD", "wget", "http://localhost:9090"]
+    volumes:
+      - ./prod/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ./prod/prometheus/config/web.yaml:/etc/prometheus/web.yaml
+  node-exporter:
+    logging:
+      options:
+        loki-url: "https://loki.cloudnativedays.jp/loki/api/v1/push"
+  https-portal:
+    environment:
+      DOMAINS: prometheus.cloudnativedays.jp -> http://prometheus:9090
+      STAGE: production
