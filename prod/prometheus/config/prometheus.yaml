@@ -33,6 +33,7 @@ scrape_configs:
           - node-exporter:9100
   - job_name: dreamkast
     metrics_path: /metrics
+    scheme: https
     static_configs:
       - targets:
-          - event.cloudnativedays.jp:443
+          - event.cloudnativedays.jp
