@@ -8,8 +8,16 @@ services:
       - ./stg/grafana/config/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
       - ./stg/grafana/config/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - ./stg/grafana/secrets/bigquery.pem:/etc/secrets/bigquery.pem
+    logging:
+      driver: loki
+      options:
+        loki-url: https://stg.loki.cloudnativedays.jp/loki/api/v1/push
   https-portal:
     environment:
       DOMAINS: stg.grafana.cloudnativedays.jp -> http://grafana:3000
       # FIXME: use production
       STAGE: production
+    logging:
+      driver: loki
+      options:
+        loki-url: https://stg.loki.cloudnativedays.jp/loki/api/v1/push

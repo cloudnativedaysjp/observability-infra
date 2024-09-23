@@ -14,8 +14,7 @@ datasources:
     isDefault: true
   - name: Loki
     type: loki
-    # FIXME: Change url of staging
-    url: https://loki.cloudnativedays.jp
+    url: https://stg.loki.cloudnativedays.jp
   - name: BigQuery-DS
     type: grafana-bigquery-datasource
     editable: true

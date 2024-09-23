@@ -1,10 +1,5 @@
 x-default-policy: &default_policy
   restart: unless-stopped
-  logging:
-    driver: loki
-    options:
-      # FIXME: Change Loki URL
-      loki-url: "https://loki.cloudnativedays.jp/loki/api/v1/push"
 
 services:
   grafana:
