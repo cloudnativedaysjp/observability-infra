@@ -45,3 +45,4 @@ services:
 volumes:
   prometheus-data:
     external: true
+  https-portal-data:

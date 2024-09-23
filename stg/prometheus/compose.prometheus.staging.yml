@@ -17,3 +17,7 @@ services:
     logging:
       options:
         loki-url: "https://stg.loki.cloudnativedays.jp/loki/api/v1/push"
+  https-portal:
+    environment:
+      DOMAINS: stg.prometheus.cloudnativedays.jp -> http://prometheus:9090
+      STAGE: production
