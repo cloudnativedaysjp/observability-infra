@@ -19,6 +19,8 @@ services:
       - '443:443'
     volumes:
       - https-portal-data:/var/lib/https-portal
+    environment:
+      WEBSOCKET: 'true'
     depends_on:
       - loki
 
