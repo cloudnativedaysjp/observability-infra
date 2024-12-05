@@ -1,0 +1,20 @@
+services:
+  grafana:
+    volumes:
+      - ./stg/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./stg/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./stg/grafana/config/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
+      - ./stg/grafana/config/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./stg/grafana/secrets/bigquery.pem:/etc/secrets/bigquery.pem
+  loki:
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./stg/loki/config/config.yml:/etc/loki/local-config.yaml
+  prometheus:
+    volumes:
+      - ./stg/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ./stg/prometheus/config/web.yaml:/etc/prometheus/web.yaml
+  https-portal:
+    environment:
+      DOMAINS: "stg.grafana.cloudnativedays.jp -> http://grafana:3000, stg.loki.cloudnativedays.jp -> http://loki:3100, stg.prometheus.cloudnativedays.jp -> http://prometheus:9090"
+      STAGE: production
