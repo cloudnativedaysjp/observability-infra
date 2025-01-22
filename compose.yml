@@ -1,0 +1,61 @@
+x-default-policy: &default_policy
+  restart: unless-stopped
+  logging:
+    driver: loki
+    options:
+      loki-url: http://loki:3100/loki/api/v1/push
+
+services:
+  grafana:
+    <<: *default_policy
+    container_name: grafana
+    image: grafana/grafana:11.1.1
+    env_file:
+      - .env
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - 3000:3000
+  loki:
+    <<: *default_policy
+    container_name: loki
+    image: grafana/loki:2.9.5
+    volumes:
+      - loki-data:/loki
+  prometheus:
+    <<: *default_policy
+    container_name: prometheus
+    image: prom/prometheus:v2.54.0
+    command: "--config.file=/etc/prometheus/prometheus.yaml --web.config.file=/etc/prometheus/web.yaml --storage.tsdb.retention.size=80GB"
+    volumes:
+      - prometheus-data:/etc/prometheus/data/
+    healthcheck:
+      interval: "30s"
+      timeout: "1m30s"
+      retries: 10
+      start_period: "10s"
+      test: ["CMD", "wget", "http://localhost:9090"]
+  https-portal:
+    <<: *default_policy
+    container_name: https-portal
+    image: steveltn/https-portal:1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+    environment:
+      WEBSOCKET: "true"
+    depends_on:
+      - grafana
+      - prometheus
+      - loki
+
+volumes:
+  grafana-data:
+    external: true
+  loki-data:
+    external: true
+  prometheus-data:
+    external: true
+  https-portal-data:
