@@ -37,3 +37,7 @@ scrape_configs:
     static_configs:
       - targets:
           - staging.dev.cloudnativedays.jp
+  - job_name: pushgateway
+    static_configs:
+      - targets:
+        - pushgateway:9091
