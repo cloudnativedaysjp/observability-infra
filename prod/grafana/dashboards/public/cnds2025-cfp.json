@@ -802,7 +802,7 @@
           "expr": "count (dreamkast_select_proposal_items{conference_id=\"13\", proposal_items_label=\"session_time\", proposal_items_params=~\".*196.*\"})",
           "hide": false,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "20min (for keynote)",
           "range": true,
           "refId": "B"
         }
@@ -870,7 +870,7 @@
           "exemplar": false,
           "expr": "count (dreamkast_select_proposal_items{conference_id=\"13\", proposal_items_label=\"language\", proposal_items_params=~\".*197.*\"})",
           "instant": false,
-          "legendFormat": "EN",
+          "legendFormat": "JP",
           "range": true,
           "refId": "A"
         },
@@ -882,7 +882,7 @@
           "editorMode": "code",
           "expr": "count (dreamkast_select_proposal_items{conference_id=\"13\", proposal_items_label=\"language\", proposal_items_params=~\".*198.*\"})",
           "hide": false,
-          "legendFormat": "JP",
+          "legendFormat": "EN",
           "range": true,
           "refId": "B"
         }
@@ -907,6 +907,6 @@
   "timezone": "",
   "title": "CNDS2025 Proposal",
   "uid": "MjS2gzIvZ",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
