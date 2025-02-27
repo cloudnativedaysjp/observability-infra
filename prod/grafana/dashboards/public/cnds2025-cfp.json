@@ -258,7 +258,7 @@
           "expr": "dreamkast_talk_difficulties_count{conference_id=\"13\", talk_difficulty_name=~\"上級者|中級者|初級者\"}",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{talk_difficulty}}",
+          "legendFormat": "{{talk_difficulty_name}}",
           "range": true,
           "refId": "A"
         }
@@ -907,6 +907,6 @@
   "timezone": "",
   "title": "CNDS2025 Proposal",
   "uid": "MjS2gzIvZ",
-  "version": 8,
+  "version": 12,
   "weekStart": ""
 }
