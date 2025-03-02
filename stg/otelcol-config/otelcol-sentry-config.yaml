@@ -1,0 +1,72 @@
+---
+extensions:
+  health_check:
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  hostmetrics:
+    collection_interval: 1m
+    scrapers:
+      cpu:
+      disk:
+      filesystem:
+      load:
+      memory:
+      network:
+      paging:
+  filelog:
+    include:
+      - /var/lib/docker/containers/*/*-json.log
+    encoding: utf-8
+    include_file_name: false
+    include_file_path: true
+    operators:
+      - id: container-parser
+        type: container
+
+processors:
+  attributes:
+    actions:
+      - action: upsert
+        key: service.namespace
+        value: sentry-stg
+      - action: upsert
+        key: service.name
+        value: sentry-stg
+  batch:
+    timeout: 1m
+  resourcedetection/system:
+    detectors: ["system"]
+    system:
+      hostname_sources: ["os"]
+
+
+exporters:
+  otlp/mackerel:
+    endpoint: otlp.mackerelio.com:4317
+    compression: gzip
+    headers:
+      Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+  otlphttp/loki:
+    endpoint: https://stg.loki.cloudnativedays.jp/otlp
+
+service:
+  pipelines:
+    # traces:
+    #   receivers: [otlp]
+    #   processors: [batch]
+    #   exporters: [debug]
+    metrics:
+      receivers: [otlp, hostmetrics]
+      processors: [attributes, batch, resourcedetection/system]
+      exporters: [otlp/mackerel]
+    logs:
+      receivers: [filelog]
+      processors: [batch]
+      exporters: [otlphttp/loki]
+  extensions: [health_check]
