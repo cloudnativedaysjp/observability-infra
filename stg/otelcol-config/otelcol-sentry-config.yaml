@@ -45,7 +45,6 @@ processors:
     system:
       hostname_sources: ["os"]
 
-
 exporters:
   otlp/mackerel:
     endpoint: otlp.mackerelio.com:4317
