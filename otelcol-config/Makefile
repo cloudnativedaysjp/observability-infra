@@ -12,7 +12,7 @@ generate-otelcol: ## Generate the OpenTelemetry Collector code without building 
 .PHONY: build
 build: ## Build the OpenTelemetry Collector
 	docker buildx build -t ocb:latest .
-	docker run --rm -it -v $(shell pwd):/mnt ocb:latest ocb --config builder-config.yaml
+	docker run --rm -it -v $(shell pwd):/mnt ocb:latest ocb --config builder-config.yaml --skip-generate
 
 .PHONY: lint
 lint: ## Lint the code
