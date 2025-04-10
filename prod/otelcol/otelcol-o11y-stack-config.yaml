@@ -19,25 +19,37 @@ receivers:
       memory:
       network:
       paging:
-  filelog:
-    include:
-      - /var/lib/docker/containers/*/*-json.log
-    encoding: utf-8
-    include_file_name: false
-    include_file_path: true
-    operators:
-      - id: container-parser
-        type: container
+  prometheus/grafana:
+    config:
+      scrape_configs:
+        - job_name: grafana
+          scrape_interval: 1m
+          static_configs:
+            - targets: ['localhost:3000']
 
 processors:
   attributes:
     actions:
       - action: upsert
         key: service.namespace
-        value: sentry-stg
+        value: o11y-stacks
       - action: upsert
         key: service.name
-        value: sentry-stg
+        value: o11y-stacks
+      - action: upsert
+        key: deployment.environment.name
+        value: prod
+  attributes/grafana:
+    actions:
+      - action: upsert
+        key: service.namespace
+        value: o11y-stacks
+      - action: upsert
+        key: service.name
+        value: grafana
+      - action: upsert
+        key: deployment.environment.name
+        value: prod
   batch:
     timeout: 1m
   resourcedetection/system:
@@ -51,21 +63,15 @@ exporters:
     compression: gzip
     headers:
       Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
-  otlphttp/loki:
-    endpoint: https://stg.loki.cloudnativedays.jp/otlp
 
 service:
   pipelines:
-    # traces:
-    #   receivers: [otlp]
-    #   processors: [batch]
-    #   exporters: [debug]
     metrics:
       receivers: [otlp, hostmetrics]
       processors: [attributes, batch, resourcedetection/system]
       exporters: [otlp/mackerel]
-    logs:
-      receivers: [filelog]
-      processors: [batch]
-      exporters: [otlphttp/loki]
+    metrics/grafana:
+      receivers: [prometheus/grafana]
+      processors: [attributes/grafana, batch]
+      exporters: [otlp/mackerel]
   extensions: [health_check]
