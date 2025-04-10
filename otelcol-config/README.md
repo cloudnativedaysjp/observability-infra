@@ -8,6 +8,14 @@
 - `make generate-code` で collector のコードを生成する
 - git commit し、pull request を作る
 
+# install の仕方 (初回のみ)
+
+- AMD64 版の otelcol を install する
+  - [Install the Collector | OpenTelemetry#DEB Installation](https://opentelemetry.io/docs/collector/installation/#deb-installation])
+- Mackerel の API key を設定する
+  - `/etc/otelcol/otelcol.conf` に `MACKEREL_APIKEY="〜"` を追記する
+- 以下、otelcol を deploy する
+
 # deploy の仕方
 
 - (otelcol をインストールしていなければ) dpkg で otelcol を入れる
