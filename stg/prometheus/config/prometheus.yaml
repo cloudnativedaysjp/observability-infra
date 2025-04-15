@@ -37,3 +37,9 @@ scrape_configs:
     static_configs:
       - targets:
           - staging.dev.cloudnativedays.jp
+  - job_name: dk-weaver
+    metrics_path: /metrics
+    scheme: https
+    static_configs:
+      - targets:
+          - dkw.dev.cloudnativedays.jp
