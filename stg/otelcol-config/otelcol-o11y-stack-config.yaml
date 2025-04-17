@@ -32,18 +32,24 @@ processors:
     actions:
       - action: upsert
         key: service.namespace
-        value: o11y-stacks-stg
+        value: o11y-stacks
       - action: upsert
         key: service.name
-        value: o11y-stacks-stg
+        value: o11y-stacks
+      - action: upsert
+        key: deployment.environment.name
+        value: stg
   attributes/grafana:
     actions:
       - action: upsert
         key: service.namespace
-        value: o11y-stacks-stg
+        value: o11y-stacks
       - action: upsert
         key: service.name
         value: grafana
+      - action: upsert
+        key: deployment.environment.name
+        value: stg
   batch:
     timeout: 1m
   resourcedetection/system:
@@ -60,10 +66,6 @@ exporters:
 
 service:
   pipelines:
-    # traces:
-    #   receivers: [otlp]
-    #   processors: [batch]
-    #   exporters: [debug]
     metrics:
       receivers: [otlp, hostmetrics]
       processors: [attributes, batch, resourcedetection/system]
@@ -72,8 +74,4 @@ service:
       receivers: [prometheus/grafana]
       processors: [attributes/grafana, batch]
       exporters: [otlp/mackerel]
-    # logs:
-    #   receivers: [otlp]
-    #   processors: [batch]
-    #   exporters: [debug]
   extensions: [health_check]
