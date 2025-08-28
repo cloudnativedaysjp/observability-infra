@@ -21,13 +21,12 @@
       }
     ]
   },
-  "description": "",
+  "description": "CNDS2025のプロポーザルの募集状況を可視化したダッシュボードです。",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 6,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -44,8 +43,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -80,7 +78,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -117,6 +115,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -147,8 +146,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -174,10 +172,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -243,10 +243,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -319,11 +321,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.0.4",
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -464,10 +467,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -575,10 +580,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -658,10 +665,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -773,11 +782,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "9.0.4",
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -856,10 +866,12 @@
           "values": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.0",
       "targets": [
         {
           "datasource": {
@@ -891,22 +903,24 @@
       "type": "piechart"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [
-    "CNDS2025"
+    "CNDS2025",
+    "Dreamkast",
+    "Prometheus"
   ],
   "templating": {
     "list": []
   },
   "time": {
     "from": "2025-02-19T15:00:00.000Z",
-    "to": "2025-05-22T14:59:59.000Z"
+    "to": "2025-03-23T14:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "CNDS2025 Proposal",
   "uid": "MjS2gzIvZ",
-  "version": 12,
-  "weekStart": ""
+  "version": 17
 }
