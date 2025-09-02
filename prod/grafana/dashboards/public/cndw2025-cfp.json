@@ -29,6 +29,39 @@
   "links": [],
   "panels": [
     {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "プロポーザル応募はこちらから！",
+          "url": "https://event.cloudnativedays.jp/cndw2025/speakers/guidance"
+        }
+      ],
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# CNDW2025 Proposal Dashboard\n\nCNDW2025のプロポーザルの応募状況を可視化したダッシュボードです。ぜひ参考にしてみてください!!\n\n現在のプロポーザルの応募状況は[こちら](https://event.cloudnativedays.jp/cndw2025/proposals)から確認できます。",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.0",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
@@ -59,7 +92,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "id": 1,
       "options": {
@@ -161,7 +194,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 4
       },
       "id": 2,
       "options": {
@@ -221,7 +254,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 12
       },
       "id": 3,
       "options": {
@@ -298,7 +331,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 12
       },
       "id": 4,
       "options": {
@@ -440,7 +473,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 16
+        "y": 20
       },
       "id": 5,
       "options": {
@@ -548,7 +581,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 16
+        "y": 20
       },
       "id": 6,
       "options": {
@@ -629,7 +662,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 16
+        "y": 20
       },
       "id": 7,
       "options": {
@@ -743,7 +776,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 24
+        "y": 28
       },
       "id": 9,
       "options": {
@@ -823,7 +856,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 28
       },
       "id": 11,
       "options": {
@@ -892,5 +925,5 @@
   "timezone": "",
   "title": "CNDW2025 Proposal",
   "uid": "40c99faa-fca9-4ec9-bd3e-ce1952e0c0d4",
-  "version": 6
+  "version": 7
 }
