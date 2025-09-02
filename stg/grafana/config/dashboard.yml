@@ -8,7 +8,7 @@ providers:
     type: file
     disableDeletion: false
     allowUiUpdates: true
-    editable: false
+    editable: true
     options:
       path: /var/lib/grafana/dashboards/default
   - name: private
@@ -17,7 +17,7 @@ providers:
     type: file
     disableDeletion: false
     allowUiUpdates: true
-    editable: false
+    editable: true
     options:
       path: /var/lib/grafana/dashboards/private
   - name: public
@@ -26,6 +26,6 @@ providers:
     type: file
     disableDeletion: false
     allowUiUpdates: true
-    editable: false
+    editable: true
     options:
       path: /var/lib/grafana/dashboards/public
