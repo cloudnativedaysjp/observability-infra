@@ -880,7 +880,7 @@
   "preload": false,
   "refresh": "",
   "schemaVersion": 41,
-  "tags": [],
+  "tags": ["CNDW2025", "Proposal"],
   "templating": {
     "list": []
   },
@@ -892,5 +892,5 @@
   "timezone": "",
   "title": "CNDW2025 Proposal",
   "uid": "40c99faa-fca9-4ec9-bd3e-ce1952e0c0d4",
-  "version": 5
+  "version": 6
 }
