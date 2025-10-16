@@ -35,6 +35,10 @@ services:
       retries: 10
       start_period: "10s"
       test: ["CMD", "wget", "http://localhost:9090"]
+  pushgateway:
+    <<: *default_policy
+    container_name: pushgateway
+    image: prom/pushgateway:v1.10.0
   https-portal:
     <<: *default_policy
     container_name: https-portal
@@ -49,6 +53,7 @@ services:
     depends_on:
       - grafana
       - prometheus
+      - pushgateway
       - loki
 
 volumes:

@@ -16,5 +16,9 @@ services:
       - ./stg/prometheus/config/web.yaml:/etc/prometheus/web.yaml
   https-portal:
     environment:
-      DOMAINS: "stg.grafana.cloudnativedays.jp -> http://grafana:3000, stg.loki.cloudnativedays.jp -> http://loki:3100, stg.prometheus.cloudnativedays.jp -> http://prometheus:9090"
+      DOMAINS: >
+        stg.grafana.cloudnativedays.jp -> http://grafana:3000,
+        stg.loki.cloudnativedays.jp -> http://loki:3100,
+        stg.prometheus.cloudnativedays.jp -> http://prometheus:9090,
+        stg.pushgateway.cloudnativedays.jp -> http://pushgateway:9091
       STAGE: production
