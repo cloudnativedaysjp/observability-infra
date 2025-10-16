@@ -32,7 +32,7 @@ receivers:
         - job_name: loki
           scrape_interval: 1m
           static_configs:
-            - targets: ['stg.loki.cloudnativedays.jp']
+            - targets: ['loki.cloudnativedays.jp']
           scheme: https
 
 processors:
