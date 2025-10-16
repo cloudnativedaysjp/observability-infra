@@ -26,6 +26,14 @@ receivers:
           scrape_interval: 1m
           static_configs:
             - targets: ['localhost:3000']
+  prometheus/loki:
+    config:
+      scrape_configs:
+        - job_name: loki
+          scrape_interval: 1m
+          static_configs:
+            - targets: ['stg.loki.cloudnativedays.jp']
+          scheme: https
 
 processors:
   attributes:
@@ -47,6 +55,17 @@ processors:
       - action: upsert
         key: service.name
         value: grafana
+      - action: upsert
+        key: deployment.environment.name
+        value: stg
+  attributes/loki:
+    actions:
+      - action: upsert
+        key: service.namespace
+        value: o11y-stacks
+      - action: upsert
+        key: service.name
+        value: loki
       - action: upsert
         key: deployment.environment.name
         value: stg
@@ -73,5 +92,9 @@ service:
     metrics/grafana:
       receivers: [prometheus/grafana]
       processors: [attributes/grafana, batch]
+      exporters: [otlp/mackerel]
+    metrics/loki:
+      receivers: [prometheus/loki]
+      processors: [attributes/loki, batch]
       exporters: [otlp/mackerel]
   extensions: [health_check]
