@@ -2,7 +2,11 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
+  # v3では以下の設定も推奨
+  grpc_listen_port: 9096
+  log_level: info
 
+# 共通設定
 common:
   path_prefix: /loki
   storage:
@@ -11,11 +15,14 @@ common:
       rules_directory: /loki/rules
   replication_factor: 1
   ring:
+    instance_addr: 127.0.0.1
     kvstore:
       store: inmemory
 
+# スキーマ設定（最重要！）
 schema_config:
   configs:
+    # 既存のv11設定を維持（過去データの読み取り用）
     - from: 2020-10-24
       store: boltdb-shipper
       object_store: filesystem
@@ -24,18 +31,94 @@ schema_config:
         prefix: index_
         period: 24h
 
-limits_config:
-  retention_period: 744h # 31 days
+    # v13スキーマを追加（新規データ用）
+    # 重要: from日付は未来の日付を設定
+    - from: 2025-02-01  # ← 未来の日付を設定（実行日の翌日以降）
+      store: tsdb         # ← TSDBインデックスを使用
+      object_store: filesystem
+      schema: v13         # ← v13スキーマ
+      index:
+        prefix: index_
+        period: 24h
+        # TSDB固有の設定
+        path_prefix: /loki/tsdb-index
 
-# By default, Loki will send anonymous, but uniquely-identifiable usage and configuration
-# analytics to Grafana Labs. These statistics are sent to https://stats.grafana.org/
-#
-# Statistics help us better understand how Loki is used, and they show us performance
-# levels for most users. This helps us prioritize features and documentation.
-# For more information on what's sent, look at
-# https://github.com/grafana/loki/blob/main/pkg/usagestats/stats.go
-# Refer to the buildReport method to see what goes into a report.
-#
-# If you would like to disable reporting, uncomment the following lines:
-#analytics:
-#  reporting_enabled: false
+# 制限設定（v3のデフォルト値に合わせる）
+limits_config:
+  # 保持期間
+  retention_period: 744h  # 31日間
+
+  # v3で変更されたデフォルト値
+  max_label_names_per_series: 15  # v2: 30 → v3: 15
+  max_line_size: 256KB            # v3で新設
+
+  # 必要に応じて調整
+  max_entries_limit_per_query: 5000
+  max_streams_per_user: 0  # 0 = 無制限
+  max_global_streams_per_user: 0
+
+  # クエリの制限
+  max_query_length: 721h
+  max_query_parallelism: 32
+
+# 圧縮設定
+compactor:
+  working_directory: /loki/compactor
+  shared_store: filesystem
+  compaction_interval: 10m
+  retention_enabled: true
+  retention_delete_delay: 2h
+  retention_delete_worker_count: 150
+  # v3では以下が必要
+  delete_request_store: filesystem
+
+# テーブルマネージャー（v3では非推奨だが互換性のため残す）
+table_manager:
+  retention_deletes_enabled: true
+  retention_period: 744h
+
+# Ingester設定
+ingester:
+  wal:
+    enabled: true
+    dir: /loki/wal
+  lifecycler:
+    address: 127.0.0.1
+    ring:
+      kvstore:
+        store: inmemory
+      replication_factor: 1
+    final_sleep: 0s
+  chunk_idle_period: 1h
+  max_chunk_age: 1h
+  chunk_target_size: 1048576
+  chunk_retain_period: 30s
+
+# Querier設定
+querier:
+  max_concurrent: 20
+
+# Frontend設定
+frontend:
+  max_outstanding_per_tenant: 2048
+
+# Ruler設定（アラートルール用）
+ruler:
+  storage:
+    type: local
+    local:
+      directory: /loki/rules
+  rule_path: /loki/rules-temp
+  alertmanager_url: http://localhost:9093
+  ring:
+    kvstore:
+      store: inmemory
+
+# 新機能の設定（オプション）
+# 構造化メタデータを無効化する場合
+# limits_config:
+#   allow_structured_metadata: false
+
+# service_nameラベルの自動付与を無効化する場合
+# limits_config:
+#   discover_service_name: []
