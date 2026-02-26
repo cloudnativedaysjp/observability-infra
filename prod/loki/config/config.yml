@@ -2,7 +2,6 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
-  # v3では以下の設定も推奨
   grpc_listen_port: 9096
   log_level: info
 
@@ -22,7 +21,6 @@ common:
 # スキーマ設定（最重要！）
 schema_config:
   configs:
-    # 既存のv11設定を維持（過去データの読み取り用）
     - from: 2020-10-24
       store: boltdb-shipper
       object_store: filesystem
@@ -31,17 +29,14 @@ schema_config:
         prefix: index_
         period: 24h
 
-    # v13スキーマを追加（新規データ用）
-    # 重要: from日付は未来の日付を設定
-    - from: 2025-02-01  # ← 未来の日付を設定（実行日の翌日以降）
-      store: tsdb         # ← TSDBインデックスを使用
+    - from: 2025-10-18
+      store: tsdb        
       object_store: filesystem
-      schema: v13         # ← v13スキーマ
+      schema: v13        
       index:
         prefix: index_
-        period: 24h
-        # TSDB固有の設定
-        path_prefix: /loki/tsdb-index
+        period: 1d
+        path_prefix: loki/tsdb-index/
 
 # 制限設定（v3のデフォルト値に合わせる）
 limits_config:
@@ -49,12 +44,10 @@ limits_config:
   retention_period: 744h  # 31日間
 
   # v3で変更されたデフォルト値
-  max_label_names_per_series: 15  # v2: 30 → v3: 15
-  max_line_size: 256KB            # v3で新設
-
-  # 必要に応じて調整
+  max_label_names_per_series: 15 
+  max_line_size: 256KB 
   max_entries_limit_per_query: 5000
-  max_streams_per_user: 0  # 0 = 無制限
+  max_streams_per_user: 0  # 無制限
   max_global_streams_per_user: 0
 
   # クエリの制限
@@ -64,12 +57,10 @@ limits_config:
 # 圧縮設定
 compactor:
   working_directory: /loki/compactor
-  shared_store: filesystem
   compaction_interval: 10m
   retention_enabled: true
   retention_delete_delay: 2h
   retention_delete_worker_count: 150
-  # v3では以下が必要
   delete_request_store: filesystem
 
 # テーブルマネージャー（v3では非推奨だが互換性のため残す）
