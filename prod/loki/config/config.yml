@@ -5,20 +5,14 @@ server:
   grpc_listen_port: 9096
   log_level: info
 
-# 共通設定
 common:
   path_prefix: /loki
-  storage:
-    filesystem:
-      chunks_directory: /loki/chunks
-      rules_directory: /loki/rules
   replication_factor: 1
   ring:
     instance_addr: 127.0.0.1
     kvstore:
       store: inmemory
 
-# スキーマ設定（最重要！）
 schema_config:
   configs:
     - from: 2020-10-24
@@ -30,45 +24,28 @@ schema_config:
         period: 24h
 
     - from: 2025-10-18
-      store: tsdb        
+      store: tsdb
       object_store: filesystem
-      schema: v13        
+      schema: v13
       index:
         prefix: index_
-        period: 1d
-        path_prefix: loki/tsdb-index/
+        period: 24h
 
-# 制限設定（v3のデフォルト値に合わせる）
+storage_config:
+  filesystem:
+    directory: /loki/chunks
+
 limits_config:
-  # 保持期間
-  retention_period: 744h  # 31日間
+  retention_period: 744h
+  max_query_length: 744h
 
-  # v3で変更されたデフォルト値
-  max_label_names_per_series: 15 
-  max_line_size: 256KB 
-  max_entries_limit_per_query: 5000
-  max_streams_per_user: 0  # 無制限
-  max_global_streams_per_user: 0
-
-  # クエリの制限
-  max_query_length: 721h
-  max_query_parallelism: 32
-
-# 圧縮設定
 compactor:
   working_directory: /loki/compactor
   compaction_interval: 10m
   retention_enabled: true
   retention_delete_delay: 2h
-  retention_delete_worker_count: 150
   delete_request_store: filesystem
 
-# テーブルマネージャー（v3では非推奨だが互換性のため残す）
-table_manager:
-  retention_deletes_enabled: true
-  retention_period: 744h
-
-# Ingester設定
 ingester:
   wal:
     enabled: true
@@ -80,20 +57,13 @@ ingester:
         store: inmemory
       replication_factor: 1
     final_sleep: 0s
-  chunk_idle_period: 1h
-  max_chunk_age: 1h
-  chunk_target_size: 1048576
-  chunk_retain_period: 30s
 
-# Querier設定
 querier:
   max_concurrent: 20
 
-# Frontend設定
 frontend:
   max_outstanding_per_tenant: 2048
 
-# Ruler設定（アラートルール用）
 ruler:
   storage:
     type: local
@@ -104,12 +74,3 @@ ruler:
   ring:
     kvstore:
       store: inmemory
-
-# 新機能の設定（オプション）
-# 構造化メタデータを無効化する場合
-# limits_config:
-#   allow_structured_metadata: false
-
-# service_nameラベルの自動付与を無効化する場合
-# limits_config:
-#   discover_service_name: []
