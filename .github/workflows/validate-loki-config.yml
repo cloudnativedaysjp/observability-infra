@@ -20,5 +20,5 @@ jobs:
         run: |
           docker run --rm \
             -v "$PWD:/work" -w /work \
-            grafana/loki:3.0.1 \
+            grafana/loki:3.6.7 \
             -config.file=${{ matrix.env }}/loki/config/config.yml -verify-config

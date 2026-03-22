@@ -19,7 +19,7 @@ services:
   loki:
     <<: *default_policy
     container_name: loki
-    image: grafana/loki:2.9.5
+    image: grafana/loki:3.6.7
     volumes:
       - loki-data:/loki
   prometheus:
