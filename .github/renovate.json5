@@ -1,0 +1,25 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:best-practices',
+    'customManagers:dockerfileVersions',
+    'customManagers:makefileVersions',
+    ':semanticCommitTypeAll(chore)',
+    ':timezone(Asia/Tokyo)',
+  ],
+  labels: ['dependencies'],
+  minimumReleaseAge: '14 days',
+  prConcurrentLimit: 5,
+  branchConcurrentLimit: 5,
+  prHourlyLimit: 5,
+  dependencyDashboard: true,
+  enabledManagers: [
+    'dockerfile',
+    'docker-compose',
+    'github-actions',
+    'ocb',
+  ],
+  ocb: {
+    managerFilePatterns: ["otelcol-config/builder-config.yaml"]
+  },
+}
