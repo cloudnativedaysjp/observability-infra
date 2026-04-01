@@ -1,4 +1,10 @@
 {
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "u5sXIaqVk"
+  },
+  "spec": {
     "annotations": {
       "list": [
         {
@@ -10,7 +16,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
+          "name": "Annotations \u0026 Alerts",
           "target": {
             "limit": 100,
             "matchAny": false,
@@ -21,18 +27,28 @@
         }
       ]
     },
-    "description": "",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 46,
-    "links": [],
-    "liveNow": false,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/cloudnativedaysjp/observability-infra/blob/main/stg/grafana/dashboardspublic/dk-deep-dive.json"
+      }
+    ],
     "panels": [
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
         },
         "gridPos": {
           "h": 5,
@@ -42,10 +58,15 @@
         },
         "id": 4,
         "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
           "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、CloudNative Daysの配信プラットフォームであるDreamkastの過去60日間のアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう,\n\n",
           "mode": "markdown"
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "title": "このダッシュボードについて",
         "type": "text"
       },
@@ -67,7 +88,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -90,6 +111,7 @@
           "graphMode": "area",
           "justifyMode": "center",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -97,9 +119,11 @@
             "fields": "",
             "values": true
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -173,7 +197,7 @@
                   "id": "custom.hideFrom",
                   "value": {
                     "legend": false,
-                    "tooltip": false,
+                    "tooltip": true,
                     "viz": true
                   }
                 }
@@ -196,6 +220,7 @@
           "legend": {
             "displayMode": "table",
             "placement": "right",
+            "showLegend": true,
             "values": [
               "value"
             ]
@@ -208,12 +233,14 @@
             "fields": "",
             "values": true
           },
+          "sort": "desc",
           "tooltip": {
+            "hideZeros": false,
             "mode": "none",
             "sort": "none"
           }
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -260,6 +287,9 @@
               "mode": "continuous-RdYlGr"
             },
             "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "fillOpacity": 90,
@@ -272,6 +302,9 @@
               "lineWidth": 1,
               "scaleDistribution": {
                 "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
             "mappings": [],
@@ -280,7 +313,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -302,23 +335,26 @@
           "barRadius": 0,
           "barWidth": 0.99,
           "colorByField": "users",
+          "fullHighlight": false,
           "groupWidth": 0.7,
           "legend": {
             "calcs": [],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "orientation": "auto",
           "showValue": "auto",
           "stacking": "none",
           "tooltip": {
+            "hideZeros": false,
             "mode": "none",
             "sort": "none"
           },
           "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -409,8 +445,9 @@
           "groupWidth": 0.7,
           "legend": {
             "calcs": [],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "orientation": "auto",
           "showValue": "auto",
@@ -544,10 +581,14 @@
         "type": "stat"
       }
     ],
-    "refresh": false,
-    "schemaVersion": 36,
-    "style": "dark",
-    "tags": [],
+    "preload": false,
+    "refresh": "",
+    "schemaVersion": 42,
+    "tags": [
+      "CloudNativeDays",
+      "Dreamkast",
+      "GA4"
+    ],
     "templating": {
       "list": []
     },
@@ -556,9 +597,8 @@
       "to": "now"
     },
     "timepicker": {},
-    "timezone": "",
+    "timezone": "browser",
     "title": "Dreamkast Deep Dive",
-    "uid": "u5sXIaqVk",
-    "version": 10,
     "weekStart": ""
   }
+}
