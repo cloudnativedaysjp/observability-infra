@@ -1,4 +1,10 @@
 {
+  "apiVersion": "dashboard.grafana.app/v1beta1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "I5GV5V34k"
+  },
+  "spec": {
     "annotations": {
       "list": [
         {
@@ -10,7 +16,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
+          "name": "Annotations \u0026 Alerts",
           "target": {
             "limit": 100,
             "matchAny": false,
@@ -21,18 +27,28 @@
         }
       ]
     },
-    "description": "",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 41,
-    "links": [],
-    "liveNow": false,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/cloudnativedaysjp/observability-infra/blob/main/stg/grafana/dashboardspublic/cnd-deep-dive.json"
+      }
+    ],
     "panels": [
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
         },
         "gridPos": {
           "h": 5,
@@ -42,10 +58,15 @@
         },
         "id": 4,
         "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
+          },
           "content": "# CloudNativeDays Deep Dive\n\nこのダッシュボードは、CloudNativeDaysの[公式サイト](https://cloudnativedays.jp/)の過去60日間のアクセス情報を可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう!!\n\n",
           "mode": "markdown"
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "title": "このダッシュボードについて",
         "type": "text"
       },
@@ -67,7 +88,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -90,6 +111,7 @@
           "graphMode": "area",
           "justifyMode": "center",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -97,10 +119,12 @@
             "fields": "",
             "values": true
           },
+          "showPercentChange": false,
           "text": {},
-          "textMode": "auto"
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -112,7 +136,7 @@
             "location": "US",
             "project": "cloudnativedays-o11y",
             "rawQuery": true,
-            "rawSql": "select nullif(geo.country,'') as country, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where geo.country is not null group by country order by users desc",
+            "rawSql": "SELECT\n  NULLIF(geo.country, '') AS country,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM\n  `cloudnativedays-o11y.analytics_363617797.events_*`\nWHERE\n  _TABLE_SUFFIX BETWEEN\n    FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__from}))\n    AND FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__to}))\n  AND geo.country IS NOT NULL\nGROUP BY country\nORDER BY users DESC",
             "refId": "A",
             "sql": {
               "columns": [
@@ -173,6 +197,7 @@
           "legend": {
             "displayMode": "table",
             "placement": "right",
+            "showLegend": true,
             "values": [
               "value"
             ]
@@ -185,12 +210,14 @@
             "fields": "",
             "values": true
           },
+          "sort": "desc",
           "tooltip": {
+            "hideZeros": false,
             "mode": "none",
             "sort": "none"
           }
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -202,7 +229,7 @@
             "location": "US",
             "project": "cloudnativedays-o11y",
             "rawQuery": true,
-            "rawSql": "select nullif(geo.region,'') as region, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where geo.country = 'Japan' and geo.region is not null group by region order by users desc",
+            "rawSql": "SELECT\n  NULLIF(geo.region, '') AS region,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM\n  `cloudnativedays-o11y.analytics_363617797.events_*`\nWHERE\n  _TABLE_SUFFIX BETWEEN\n    FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__from}))\n    AND FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__to}))\n  AND geo.country = 'Japan'\n  AND geo.region IS NOT NULL\nGROUP BY region\nORDER BY users DESC",
             "refId": "A",
             "sql": {
               "columns": [
@@ -237,6 +264,9 @@
               "mode": "continuous-RdYlGr"
             },
             "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "fillOpacity": 90,
@@ -249,6 +279,9 @@
               "lineWidth": 1,
               "scaleDistribution": {
                 "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
             "mappings": [],
@@ -257,7 +290,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 }
               ]
             }
@@ -275,17 +308,20 @@
           "barRadius": 0,
           "barWidth": 0.99,
           "colorByField": "users",
+          "fullHighlight": false,
           "groupWidth": 0.7,
           "legend": {
             "calcs": [],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
-          "orientation": "auto",
+          "orientation": "horizontal",
           "showValue": "auto",
           "stacking": "none",
           "text": {},
           "tooltip": {
+            "hideZeros": false,
             "mode": "single",
             "sort": "none"
           },
@@ -293,7 +329,7 @@
           "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -305,7 +341,7 @@
             "location": "US",
             "project": "cloudnativedays-o11y",
             "rawQuery": true,
-            "rawSql": "select device.category as device_category, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where device.category is not null group by device_category order by users desc",
+            "rawSql": "SELECT\n  device.category AS device_category,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM\n  `cloudnativedays-o11y.analytics_363617797.events_*`\nWHERE\n  _TABLE_SUFFIX BETWEEN\n    FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__from}))\n    AND FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__to}))\n  AND device.category IS NOT NULL\nGROUP BY device_category\nORDER BY users DESC",
             "refId": "A",
             "sql": {
               "columns": [
@@ -340,6 +376,9 @@
               "mode": "continuous-RdYlGr"
             },
             "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "fillOpacity": 80,
@@ -352,6 +391,9 @@
               "lineWidth": 1,
               "scaleDistribution": {
                 "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
               }
             },
             "mappings": [],
@@ -360,7 +402,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -382,16 +424,19 @@
           "barRadius": 0,
           "barWidth": 0.97,
           "colorByField": "users",
+          "fullHighlight": false,
           "groupWidth": 0.7,
           "legend": {
             "calcs": [],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "orientation": "auto",
           "showValue": "auto",
           "stacking": "none",
           "tooltip": {
+            "hideZeros": false,
             "mode": "single",
             "sort": "none"
           },
@@ -399,7 +444,7 @@
           "xTickLabelRotation": 0,
           "xTickLabelSpacing": 0
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -411,7 +456,7 @@
             "location": "US",
             "project": "cloudnativedays-o11y",
             "rawQuery": true,
-            "rawSql": "select ifnull(device.operating_system, '') as OS, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where device.operating_system is not null group by OS order by users desc",
+            "rawSql": "SELECT\n  IFNULL(device.operating_system, '') AS OS,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM\n  `cloudnativedays-o11y.analytics_363617797.events_*`\nWHERE\n  _TABLE_SUFFIX BETWEEN\n    FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__from}))\n    AND FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__to}))\n  AND device.operating_system IS NOT NULL\nGROUP BY OS\nORDER BY users DESC",
             "refId": "A",
             "sql": {
               "columns": [
@@ -452,7 +497,7 @@
               "steps": [
                 {
                   "color": "green",
-                  "value": null
+                  "value": 0
                 },
                 {
                   "color": "red",
@@ -475,6 +520,7 @@
           "graphMode": "area",
           "justifyMode": "auto",
           "orientation": "auto",
+          "percentChangeColorMode": "standard",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -482,9 +528,11 @@
             "fields": "",
             "values": true
           },
-          "textMode": "auto"
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "9.0.4",
+        "pluginVersion": "12.4.2",
         "targets": [
           {
             "datasource": {
@@ -496,7 +544,7 @@
             "location": "US",
             "project": "cloudnativedays-o11y",
             "rawQuery": true,
-            "rawSql": "select ifnull(device.web_info.browser, '') as browsers, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where device.web_info.browser is not null group by browsers order by users desc",
+            "rawSql": "SELECT\n  IFNULL(device.web_info.browser, '') AS browsers,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM\n  `cloudnativedays-o11y.analytics_363617797.events_*`\nWHERE\n  _TABLE_SUFFIX BETWEEN\n    FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__from}))\n    AND FORMAT_DATE('%Y%m%d', TIMESTAMP_MILLIS(${__to}))\n  AND device.web_info.browser IS NOT NULL\nGROUP BY browsers\nORDER BY users DESC",
             "refId": "A",
             "sql": {
               "columns": [
@@ -521,21 +569,24 @@
         "type": "stat"
       }
     ],
-    "refresh": false,
-    "schemaVersion": 36,
-    "style": "dark",
-    "tags": [],
+    "preload": false,
+    "refresh": "",
+    "schemaVersion": 42,
+    "tags": [
+      "CloudNativeDays",
+      "GA4",
+      "Website"
+    ],
     "templating": {
       "list": []
     },
     "time": {
-      "from": "now-60d",
+      "from": "now-7d",
       "to": "now"
     },
     "timepicker": {},
-    "timezone": "",
+    "timezone": "browser",
     "title": "CloudNativeDays Deep Dive",
-    "uid": "I5GV5V34k",
-    "version": 3,
     "weekStart": ""
   }
+}

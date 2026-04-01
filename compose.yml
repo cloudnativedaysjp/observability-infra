@@ -9,7 +9,7 @@ services:
   grafana:
     <<: *default_policy
     container_name: grafana
-    image: grafana/grafana:12.1.0
+    image: grafana/grafana:12.1.0@sha256:6ac590e7cabc2fbe8d7b8fc1ce9c9f0582177b334e0df9c927ebd9670469440f
     env_file:
       - .env
     volumes:
@@ -27,7 +27,7 @@ services:
   prometheus:
     <<: *default_policy
     container_name: prometheus
-    image: prom/prometheus:v2.54.0
+    image: prom/prometheus:v2.54.0@sha256:497fe921f22fea8535fa2bcb1c193dacc6ce98c08274257b3d18a4eaae0f9647
     command: "--config.file=/etc/prometheus/prometheus.yaml --web.config.file=/etc/prometheus/web.yaml --storage.tsdb.retention.size=80GB"
     volumes:
       - prometheus-data:/etc/prometheus/data/
@@ -40,7 +40,7 @@ services:
   https-portal:
     <<: *default_policy
     container_name: https-portal
-    image: steveltn/https-portal:1
+    image: steveltn/https-portal:1@sha256:945b1a6fe1e2496fc8f0535a4121b2ab8e68b187b8fcdc50dacc2faf6589edd3
     ports:
       - "80:80"
       - "443:443"
