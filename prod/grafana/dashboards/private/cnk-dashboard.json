@@ -21,20 +21,14 @@
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 11,
+  "id": 20,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -43,24 +37,15 @@
       },
       "id": 28,
       "panels": [],
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "refId": "A"
-        }
-      ],
       "title": "Dreamkast",
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
       "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 24,
@@ -74,19 +59,10 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "# Dreamkastダッシュボード使い方\n\n主に、CloudNative Days Summer 2025で用いている配信プラットフォーム`Dreamkastのメトリクス`を表示するダッシュボードです。\n動画配信のメトリクスに加え、イベントの登録者数などのイベント全体に関わるメトリクスを表示する役割を持ちます。\n\n現在表示しているメトリクスは下記の通りです。\n\n- CNDS2025視聴者数: Dreamkastを通して`動画視聴しているユーザ数`を表示しています。\n- 累計チャット数: Dreamkastの動画の横に配置している`チャットへの累計投稿数`を表示しています。\n- CNDS2025参加登録者数: `CNDS2025に参加登録いただいた人数`を表示しています。",
+        "content": "# Dreamkastダッシュボード使い方\n\n主に、[クラウドネイティブ会議](https://kaigi.cloudnativedays.jp/)で用いている配信プラットフォーム`Dreamkastのメトリクス`を表示するダッシュボードです。\n\n動画配信のメトリクスに加え、イベントの登録者数などのイベント全体に関わるメトリクスを表示する役割を持ちます。\n\n現在表示しているメトリクスは下記の通りです。\n\n- クラウドネイティブ会議視聴者数: Dreamkastを通して`動画視聴しているユーザ数`を表示しています。\n- 累計チャット数: Dreamkastの動画の横に配置している`チャットへの累計投稿数`を表示しています。\n- クラウドネイティブ会議参加登録者数: `クラウドネイティブ会議に参加登録いただいた人数`を表示しています。",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "refId": "A"
-        }
-      ],
+      "pluginVersion": "12.1.0",
       "title": "Dreamkastダッシュボード使い方",
       "type": "text"
     },
@@ -107,6 +83,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -140,7 +117,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -153,7 +131,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 18,
         "x": 0,
         "y": 9
       },
@@ -166,10 +144,12 @@
           "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -180,12 +160,12 @@
           "exemplar": true,
           "expr": "sum(dkw_viewer_count)",
           "interval": "",
-          "legendFormat": "CNDS2025視聴者数",
+          "legendFormat": "オンライン視聴者数",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "CNDS2025 オンライン視聴者数",
+      "title": "クラウドネイティブ会議_オンライン視聴者数",
       "type": "timeseries"
     },
     {
@@ -204,7 +184,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -214,8 +195,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
-        "x": 19,
+        "w": 6,
+        "x": 18,
         "y": 9
       },
       "id": 46,
@@ -236,7 +217,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -252,7 +233,7 @@
           "refId": "A"
         }
       ],
-      "title": "CNDS2025 オンライン視聴者数(最新値)",
+      "title": "クラウドネイティブ会議 オンライン視聴者数(最新値)",
       "type": "stat"
     },
     {
@@ -272,6 +253,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -302,7 +284,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -315,7 +298,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 18,
         "x": 0,
         "y": 17
       },
@@ -328,10 +311,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -364,7 +349,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -373,8 +359,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
-        "x": 19,
+        "w": 6,
+        "x": 18,
         "y": 17
       },
       "id": 48,
@@ -395,7 +381,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -430,6 +416,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "opacity",
@@ -463,7 +450,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -476,7 +464,7 @@
       },
       "gridPos": {
         "h": 13,
-        "w": 19,
+        "w": 18,
         "x": 0,
         "y": 25
       },
@@ -489,11 +477,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -502,7 +491,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "dreamkast_stats_of_registrants_offline{conference_id=\"13\"} + dreamkast_stats_of_registrants_online{conference_id=\"13\"}",
+          "expr": "dreamkast_stats_of_registrants_offline{conference_id=\"15\"} + dreamkast_stats_of_registrants_online{conference_id=\"15\"}",
           "interval": "",
           "legendFormat": "全体",
           "range": true,
@@ -516,7 +505,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "dreamkast_stats_of_registrants_offline{conference_id=\"13\"}",
+          "expr": "dreamkast_stats_of_registrants_offline{conference_id=\"15\"}",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -532,7 +521,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "dreamkast_stats_of_registrants_online{conference_id=\"13\"}",
+          "expr": "dreamkast_stats_of_registrants_online{conference_id=\"15\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "オンライン",
@@ -540,7 +529,7 @@
           "refId": "C"
         }
       ],
-      "title": "CNDS2025参加登録者数",
+      "title": "CNDW2025参加登録者数",
       "type": "timeseries"
     },
     {
@@ -559,7 +548,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -572,8 +562,8 @@
       },
       "gridPos": {
         "h": 13,
-        "w": 5,
-        "x": 19,
+        "w": 6,
+        "x": 18,
         "y": 25
       },
       "id": 53,
@@ -595,7 +585,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -604,9 +594,9 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "dreamkast_stats_of_registrants_offline{conference_id=\"13\"} + dreamkast_stats_of_registrants_online{conference_id=\"13\"}",
+          "expr": "dreamkast_stats_of_registrants_offline{conference_id=\"15\"} + dreamkast_stats_of_registrants_online{conference_id=\"15\"}",
           "interval": "",
-          "legendFormat": "CNDS2025参加数",
+          "legendFormat": "クラウドネイティブ会議参加登録数",
           "range": true,
           "refId": "A"
         },
@@ -616,7 +606,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "max(dreamkast_stats_of_registrants_offline{conference_id=\"13\"})",
+          "expr": "max(dreamkast_stats_of_registrants_offline{conference_id=\"15\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "オフライン参加者数",
@@ -629,7 +619,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "max(dreamkast_stats_of_registrants_online{conference_id=\"13\"})",
+          "expr": "max(dreamkast_stats_of_registrants_online{conference_id=\"15\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -638,27 +628,24 @@
           "refId": "C"
         }
       ],
-      "title": "CNDS2025 登録者数 (最新値)",
+      "title": "クラウドネイティブ会議_登録者数 (最新値)",
       "type": "stat"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 39,
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 41,
   "tags": [
-    "CNDS2025",
-    "Dreamkast"
+    "Dreamkast",
+    "Prometheus",
+    "クラウドネイティブ会議"
   ],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
@@ -666,7 +653,6 @@
         },
         "definition": "label_values(queryString)",
         "description": "twitter hashtag",
-        "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "queryString",
@@ -677,20 +663,18 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "CNDS2025 Dashboard",
-  "uid": "cemf6cmjbwg00c",
-  "version": 4,
-  "weekStart": ""
+  "title": "クラウドネイティブ会議_Dreamkastダッシュボード",
+  "uid": "3a2f0c8a-7fce-428b-9c27-4e3cbaa5b88f",
+  "version": 13
 }

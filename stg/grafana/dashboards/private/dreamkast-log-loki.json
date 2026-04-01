@@ -26,6 +26,10 @@
         "type": "loki",
         "uid": "P8E80F9AEF21F6940"
       },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "gridPos": {
         "h": 19,
         "w": 24,
@@ -35,6 +39,7 @@
       "id": 1,
       "options": {
         "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
         "enableLogDetails": true,
         "prettifyLogMessage": false,
         "showCommonLabels": false,
@@ -43,6 +48,7 @@
         "sortOrder": "Descending",
         "wrapLogMessage": false
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -59,25 +65,28 @@
       "type": "logs"
     }
   ],
-  "schemaVersion": 39,
-  "tags": [],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 41,
+  "tags": [
+    "CloudNativeDays",
+    "Dreamkast",
+    "Loki"
+  ],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "dreamkast-prod-dk:104",
-          "value": "dreamkast-prod-dk:104"
+          "text": "dreamkast-prod-dk:326",
+          "value": "dreamkast-prod-dk:326"
         },
         "datasource": {
           "type": "loki",
           "uid": "P8E80F9AEF21F6940"
         },
         "definition": "",
-        "hide": 0,
         "includeAll": false,
         "label": "task",
-        "multi": false,
         "name": "task",
         "options": [],
         "query": {
@@ -88,13 +97,10 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
         "current": {
-          "selected": true,
           "text": [
             "dreamkast"
           ],
@@ -107,7 +113,6 @@
           "uid": "P8E80F9AEF21F6940"
         },
         "definition": "",
-        "hide": 0,
         "includeAll": false,
         "label": "container_name",
         "multi": true,
@@ -121,8 +126,6 @@
         },
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -135,6 +138,5 @@
   "timezone": "browser",
   "title": "Dreamkast Logs",
   "uid": "ceem3cr0r42dcb",
-  "version": 3,
-  "weekStart": ""
+  "version": 7
 }
