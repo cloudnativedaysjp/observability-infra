@@ -1,0 +1,24 @@
+name: Validate Loki Config
+
+on:
+  push:
+    paths:
+      - 'stg/loki/config/**'
+      - 'prod/loki/config/**'
+      - '.github/workflows/validate-loki-config.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        env: [stg, prod]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Loki config (${{ matrix.env }})
+        run: |
+          docker run --rm \
+            -v "$PWD:/work" -w /work \
+            grafana/loki:3.6.7 \
+            -config.file=${{ matrix.env }}/loki/config/config.yml -verify-config
