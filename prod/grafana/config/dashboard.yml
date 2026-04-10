@@ -12,15 +12,15 @@ providers:
   #   editable: true
   #   options:
   #     path: /var/lib/grafana/dashboards/default
-  - name: private
-    orgId: 1
-    folder: "private"
-    type: file
-    disableDeletion: false
-    allowUiUpdates: true
-    editable: true
-    options:
-      path: /var/lib/grafana/dashboards/private
+  # - name: private
+  #   orgId: 1
+  #   folder: "private"
+  #   type: file
+  #   disableDeletion: false
+  #   allowUiUpdates: true
+  #   editable: true
+  #   options:
+  #     path: /var/lib/grafana/dashboards/private
   # - name: public
   #   orgId: 1
   #   folder: "public"
