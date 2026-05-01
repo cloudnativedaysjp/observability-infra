@@ -6,7 +6,7 @@ help:
 
 .PHONY: generate-otelcol
 generate-otelcol: ## Generate the OpenTelemetry Collector code without building it
-	go get ./... && go mod tidy && go generate ./...
+	go mod download && go mod tidy && go generate ./...
 
 .PHONY: build
 build: ## Build the OpenTelemetry Collector
