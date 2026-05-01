@@ -21,7 +21,7 @@
 - (otelcol をインストールしていなければ) dpkg で otelcol を入れる
   - [コレクターのインストール | OpenTelemetry#debのインストール](https://opentelemetry.io/ja/docs/collector/installation/#deb%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
   - `/etc/otelcol/otelcol.conf` に `MACKEREL_APIKEY` 環境変数を設定する
-- `cp 云々/otelcol-config/otelcol-云々-config.yaml /etc/otelcol/otelcol.conf` で collector の設定ファイルを設置する
+- `sudo cp 云々/otelcol-config/otelcol-云々-config.yaml /etc/otelcol/config.yaml` で collector の設定ファイルを設置する
 - otelcol 実行ファイルをビルドする
   - ```sh
     cd otelcol-config
