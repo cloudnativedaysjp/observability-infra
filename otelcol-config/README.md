@@ -3,7 +3,6 @@
 - 以下を確認してリリースされている ver. を把握する
   - https://github.com/open-telemetry/opentelemetry-collector/releases
   - https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
-- `Dockerfile` の `OCB_VERSION` を上げる
 - `builder-config.yaml` の各モジュールの ver. を上げる
 - `make generate-code` で collector のコードを生成する
 - git commit し、pull request を作る
@@ -25,12 +24,7 @@
 - otelcol 実行ファイルをビルドする
   - ```sh
     cd otelcol-config
-    docker buildx build -t ocb:latest --pull .
-    docker run --rm -it -v $(pwd):/mnt ocb:latest bash
-    ```
-  - ```sh
-    ocb --config builder-config.yaml
-    exit
+    make build
     ```
 - otelcol 実行ファイルを置き換える
   - ```sh

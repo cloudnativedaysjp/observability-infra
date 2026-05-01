@@ -77,24 +77,20 @@ processors:
       hostname_sources: ["os"]
 
 exporters:
-  otlp/mackerel:
-    endpoint: otlp.mackerelio.com:4317
-    compression: gzip
-    headers:
-      Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+  mackerel_otlp:
 
 service:
   pipelines:
     metrics:
       receivers: [otlp, hostmetrics]
       processors: [attributes, batch, resourcedetection/system]
-      exporters: [otlp/mackerel]
+      exporters: [mackerel_otlp]
     metrics/grafana:
       receivers: [prometheus/grafana]
       processors: [attributes/grafana, batch]
-      exporters: [otlp/mackerel]
+      exporters: [mackerel_otlp]
     metrics/loki:
       receivers: [prometheus/loki]
       processors: [attributes/loki, batch]
-      exporters: [otlp/mackerel]
+      exporters: [mackerel_otlp]
   extensions: [health_check]
