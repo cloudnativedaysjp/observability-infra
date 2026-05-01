@@ -4,7 +4,7 @@
   - https://github.com/open-telemetry/opentelemetry-collector/releases
   - https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
 - `builder-config.yaml` の各モジュールの ver. を上げる
-- `make generate-code` で collector のコードを生成する
+- `make generate-otelcol` で collector のコードを生成する
 - git commit し、pull request を作る
 
 # install の仕方 (初回のみ)
