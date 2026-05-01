@@ -19,6 +19,8 @@ receivers:
       memory:
       network:
       paging:
+      processes:
+      system:
   prometheus/grafana:
     config:
       scrape_configs:
