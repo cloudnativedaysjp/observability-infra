@@ -6,15 +6,14 @@ help:
 
 .PHONY: generate-otelcol
 generate-otelcol: ## Generate the OpenTelemetry Collector code without building it
-	docker buildx build -t ocb:latest .
-	docker run --rm -it -v $(shell pwd):/mnt ocb:latest ocb --config builder-config.yaml --skip-compilation
+	go mod download && go mod tidy && go generate ./...
 
 .PHONY: build
 build: ## Build the OpenTelemetry Collector
-	docker buildx build -t ocb:latest .
-	docker run --rm -it -v $(shell pwd):/mnt ocb:latest ocb --config builder-config.yaml --skip-generate
+	(cd otelcol && go build -o otelcol .)
 
 .PHONY: lint
 lint: ## Lint the code
-	hadolint Dockerfile
-	yamllint .yamllint *.yaml
+	yamllint .*.yaml *.yaml ../*/otelcol-config/otelcol-o11y-stack-config.yaml
+	MACKEREL_APIKEY='dummy' otelcol/otelcol validate --config ../stg/otelcol-config/otelcol-o11y-stack-config.yaml
+	MACKEREL_APIKEY='dummy' otelcol/otelcol validate --config ../prod/otelcol-config/otelcol-o11y-stack-config.yaml
