@@ -14,6 +14,6 @@ build: ## Build the OpenTelemetry Collector
 
 .PHONY: lint
 lint: ## Lint the code
-	yamllint .*.yaml *.yaml ../*/otelcol/otelcol-o11y-stack-config.yaml
-	MACKEREL_APIKEY='dummy' otelcol/otelcol validate --config ../prod/otelcol/otelcol-o11y-stack-config.yaml
+	yamllint .*.yaml *.yaml ../*/otelcol-config/otelcol-o11y-stack-config.yaml
 	MACKEREL_APIKEY='dummy' otelcol/otelcol validate --config ../stg/otelcol-config/otelcol-o11y-stack-config.yaml
+	MACKEREL_APIKEY='dummy' otelcol/otelcol validate --config ../prod/otelcol-config/otelcol-o11y-stack-config.yaml
