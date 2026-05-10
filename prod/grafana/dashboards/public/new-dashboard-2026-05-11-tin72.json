@@ -853,7 +853,20 @@
         ]
       }
     },
-    "links": [],
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/cloudnativedaysjp/observability-infra/blob/main/prod/grafana/dashboards/public/new-dashboard-2026-05-11-tin72.json"
+      }
+    ],
     "liveNow": false,
     "preload": false,
     "tags": [
@@ -876,7 +889,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-6h",
+      "from": "now-30m",
       "hideTimepicker": false,
       "timezone": "Asia/Tokyo",
       "to": "now"
