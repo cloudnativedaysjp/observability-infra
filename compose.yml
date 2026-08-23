@@ -9,7 +9,7 @@ services:
   grafana:
     <<: *default_policy
     container_name: grafana
-    image: grafana/grafana:13.0.1@sha256:0f86bada30d65ef9d0183b90c1e2682ac92d53d95da8bed322b984ea78a4a73a
+    image: grafana/grafana:13.2.0@sha256:3fd54ae1214669f8355f065ec9f6445d5279a3d77095ab048ca045685272429b
     env_file:
       - .env
     volumes:
@@ -19,7 +19,7 @@ services:
   loki:
     <<: *default_policy
     container_name: loki
-    image: grafana/loki:3.6.7@sha256:3c8fd3570dd9219951a60d3f919c7f31923d10baee578b77bc26c4a0b32d092d
+    image: grafana/loki:3.7.6@sha256:efd47c67f9bac88ca29bcf8cb997d9ab29d1848bd0aff579282295542a745952
     ports:
       - 127.0.0.1:3100:3100
     volumes:
