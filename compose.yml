@@ -31,6 +31,8 @@ services:
     command: "--config.file=/etc/prometheus/prometheus.yaml --web.config.file=/etc/prometheus/web.yaml --storage.tsdb.retention.size=80GB"
     volumes:
       - prometheus-data:/etc/prometheus/data/
+    ports:
+      - 9090:9090
     healthcheck:
       interval: "30s"
       timeout: "1m30s"
