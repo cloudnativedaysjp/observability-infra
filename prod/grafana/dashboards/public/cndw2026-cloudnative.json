@@ -716,7 +716,9 @@
                 "overrides": []
               },
               "options": {
-                "displayLabels": [],
+                "displayLabels": [
+                  "value"
+                ],
                 "legend": {
                   "displayMode": "list",
                   "placement": "bottom",
