@@ -1195,7 +1195,12 @@
     "links": [],
     "liveNow": false,
     "preload": false,
-    "tags": [],
+    "tags": [
+      "CNDW2026",
+      "Dreamkast",
+      "Proposal",
+      "Prometheus"
+    ],
     "timeSettings": {
       "autoRefresh": "",
       "autoRefreshIntervals": [
