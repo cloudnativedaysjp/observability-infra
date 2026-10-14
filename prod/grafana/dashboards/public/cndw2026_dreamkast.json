@@ -32,7 +32,6 @@
       }
     ],
     "cursorSync": "Off",
-    "description": "",
     "editable": true,
     "elements": {
       "panel-38": {
@@ -856,7 +855,11 @@
     "links": [],
     "liveNow": false,
     "preload": false,
-    "tags": [],
+    "tags": [
+      "CNDW2026",
+      "Dreamkast",
+      "Prometheus"
+    ],
     "timeSettings": {
       "autoRefresh": "",
       "autoRefreshIntervals": [
