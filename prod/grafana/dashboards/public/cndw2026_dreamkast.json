@@ -704,7 +704,7 @@
           "description": "",
           "id": 53,
           "links": [],
-          "title": "CNDW2026_登録者数 (最新値)",
+          "title": "CNDW2026 登録者数 (最新値)",
           "vizConfig": {
             "group": "stat",
             "kind": "VizConfig",
