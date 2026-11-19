@@ -7,12 +7,16 @@
     ':semanticCommitTypeAll(chore)',
     ':timezone(Asia/Tokyo)',
   ],
-  labels: ['dependencies'],
+  labels: [
+    'dependencies',
+  ],
   minimumReleaseAge: '14 days',
   prConcurrentLimit: 5,
   branchConcurrentLimit: 5,
   prHourlyLimit: 5,
-  dependencyDashboard: true,
+  dependencyDashboard: {
+    enabled: true,
+  },
   enabledManagers: [
     'dockerfile',
     'docker-compose',
@@ -20,6 +24,8 @@
     'ocb',
   ],
   ocb: {
-    managerFilePatterns: ["otelcol-config/builder-config.yaml"]
+    managerFilePatterns: [
+      'otelcol-config/builder-config.yaml',
+    ],
   },
 }
