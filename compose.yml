@@ -19,7 +19,7 @@ services:
   loki:
     <<: *default_policy
     container_name: loki
-    image: grafana/loki:3.7.6@sha256:efd47c67f9bac88ca29bcf8cb997d9ab29d1848bd0aff579282295542a745952
+    image: grafana/loki:3.7.10@sha256:b43c257ccfc925d4a50b8717cac61a3b51df8c48d01847936057e5c4075a24a7
     ports:
       - 127.0.0.1:3100:3100
     volumes:
@@ -40,7 +40,7 @@ services:
   https-portal:
     <<: *default_policy
     container_name: https-portal
-    image: steveltn/https-portal:1@sha256:945b1a6fe1e2496fc8f0535a4121b2ab8e68b187b8fcdc50dacc2faf6589edd3
+    image: steveltn/https-portal:1.25.7@sha256:fafefaf18b3e602e38f6d973d5145403bf6d07f21721b6c522fab377e51bc7f8
     ports:
       - "80:80"
       - "443:443"
